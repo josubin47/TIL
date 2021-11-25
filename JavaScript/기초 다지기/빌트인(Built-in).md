@@ -5,6 +5,6 @@
 ## 🔗 __Link__
 
 
-- ### [Number object](https://github.com/josubin47/TIL/tree/main/JavaScript/Number%object.md)
+- ### [Number object](https://github.com/josubin47/TIL/blob/main/JavaScript/%EA%B8%B0%EC%B4%88%20%EB%8B%A4%EC%A7%80%EA%B8%B0/Number%20object.md)
 
-- ### [String object](https://github.com/josubin47/TIL/tree/main/JavaScript/String%object.md)
+- ### [String object](https://github.com/josubin47/TIL/blob/main/JavaScript/%EA%B8%B0%EC%B4%88%20%EB%8B%A4%EC%A7%80%EA%B8%B0/String%20object.md)
