@@ -1,4 +1,4 @@
-# Number object
+# Number 오브젝트
 
 숫자 처리를 위한 오브젝트.
 

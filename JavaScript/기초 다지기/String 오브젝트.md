@@ -1,4 +1,4 @@
-# String object
+# String 오브젝트
 
 문자 처리를 위한 오브젝트.
 
