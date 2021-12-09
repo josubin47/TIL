@@ -15,7 +15,6 @@
 
 ## 종류 🔗
 
-
 - ### [Number 오브젝트](https://github.com/josubin47/TIL/blob/main/JavaScript/%EA%B8%B0%EC%B4%88%20%EB%8B%A4%EC%A7%80%EA%B8%B0/Number%20object.md)
 
 - ### [String 오브젝트](https://github.com/josubin47/TIL/blob/main/JavaScript/%EA%B8%B0%EC%B4%88%20%EB%8B%A4%EC%A7%80%EA%B8%B0/String%20object.md)
