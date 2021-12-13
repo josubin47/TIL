@@ -20,3 +20,5 @@
 - ### [String 오브젝트](https://github.com/josubin47/TIL/blob/main/JavaScript/%EA%B8%B0%EC%B4%88%20%EB%8B%A4%EC%A7%80%EA%B8%B0/String%20object.md)
 
 - ### [Object 오브젝트](https://github.com/josubin47/TIL/blob/main/JavaScript/%EA%B8%B0%EC%B4%88%20%EB%8B%A4%EC%A7%80%EA%B8%B0/Object%20%EC%98%A4%EB%B8%8C%EC%A0%9D%ED%8A%B8.md)
+
+- ### [Function 오브젝트](https://github.com/josubin47/TIL/blob/main/JavaScript/%EA%B8%B0%EC%B4%88%20%EB%8B%A4%EC%A7%80%EA%B8%B0/Function%20%EC%98%A4%EB%B8%8C%EC%A0%9D%ED%8A%B8.md)
