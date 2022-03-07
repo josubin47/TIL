@@ -101,4 +101,12 @@ let getBook = function(){
 log(getBook.toString()); //function(){ return 100 + 23; }
 ```
 
-함수를 생성하면
+## Argument 오브젝트
+
+함수를 생성하면 Argument 오브젝트를 생성한다. 함수가 호출되어 함수 안으로 이동했을 때 arguments 이름으로 생성되는 오브젝트. 항수를 호출한 곳에서 넘겨 준 값을 순서대로 저장한다.
+
+호출된 함수에 파라미터를 작성한 경우 호출된 함수의 파라미터에도 값을 설정하고 아규먼트 오브젝트에도 저장한다.
+
+checkbox 선택의 경우 apply() + argument 오브젝트 조합으로 대응.
+
+함수 밖에서는 argument 오브젝트에 접근할 수 없다.
