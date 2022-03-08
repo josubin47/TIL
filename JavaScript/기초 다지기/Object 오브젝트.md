@@ -1,6 +1,6 @@
 # Object 오브젝트
 
-## Object object (ES3 기준)
+## ES3 기준
 
 ### new Object()
 
@@ -108,3 +108,86 @@ log(Object.prototype.toString.call(obj)); //[object Number] -> [인스턴스 타
 ### toLocaleString()
 
 지역화 문자 변환 메소드를 대체하여 호출한다. Array, Number, Date 오브젝트의 toLocaleString() 메소드가 먼저 호출되고 Array, Number, Date 오브젝트가 아닐 경우 빌트인 오브젝트의 toLocaleString() 메소드가 호출된다. 에러 발생을 방지하기 위한 것이다(Object의 toLocaleString()이 없으면 에러가 발생하니까).
+
+## ES5 기준
+
+### ES5 Object의 특징
+
+함수가 추가되었다. 메소드는 하나도 없음. 빌트인 Object의 모든 메소드는 대부분의 빌트인 오브젝트에 첨부되는데, 이렇게 되면 연결이 많이 발생한다. 함수는 첨부되지 않으므로 연결 부하를 줄일 수 있다.
+
+### [defineProperty()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty) / defineProperties()
+
+프로퍼티 추가, 속성 변경. 데이터 보호의 목적. 프로퍼티마다 상태(변경, 삭제, 열거 가능 여부)를 가지고 있다. 상태가 가능일 때만 처리할 수 있으며 프로퍼티를 추가할 때 상태를 결정한다.
+
+```jsx
+const object1 = {};
+
+Object.defineProperty(object1, 'property1', {
+  value: 42,
+  writable: false
+});
+
+object1.property1 = 77;
+// throws an error in strict mode
+
+console.log(object1.property1);
+// expected output: 42
+```
+
+### 프로퍼티 디스크립터
+
+```jsx
+// 두 가지를 혼용할 수는 없음
+Object.defineProperty(o, 'conflict', {
+  value: 0x9f91102,
+  get: function() { return 0xdeadbeef; }
+});
+```
+
+### getter, setter
+
+OOP 용어. 설명은 ES5 기준이나 ES6의 방법을 사용하는 것이 더 나음.
+
+```jsx
+var o = {};
+var bValue = 38;
+Object.defineProperty(o, 'b', {
+  // ES2015 단축 메서드명 사용
+  // 아래 코드와 같음
+  // get: function() { return bValue; }
+  // set: function(newValue) { bValue = newValue; },
+  get() { return bValue; },
+  set(newValue) { bValue = newValue; },
+  enumerable: true,
+  configurable: true
+});
+o.b; // 38
+// 'b' 속성이 o 객체에 존재하고 값은 38
+// o.b를 재정의하지 않는 이상
+// o.b의 값은 항상 bValue와 동일함
+```
+
+> get() 함수로 호출하면 에러 발생.
+> 
+
+### getPrototypeOf()
+
+파라미터의 prototype에 연결된 프로퍼티를 반환한다. (setPrototypeOf()은 ES5 스펙에 없고 ES6에 있음)
+
+### keys()
+
+열거 가능한 프로퍼티 이름을 반환한다.
+
+## 프로퍼티 디스크립터 함수
+
+### preventExtensions()
+
+오브젝트에 프로퍼티 추가 금지 설정. 추가 금지를 설정한 후에는 추가 가능으로 변경 불가.
+
+### seal()
+
+오브젝트에 프로퍼티 추가, 삭제 금지 설정. 추가 금지는 오브젝트 단위로 설정하고 삭제 금지는 프로퍼티 단위. 추가 금지를 하더라도 변경은 가능하다.
+
+### freeze()
+
+오브젝트에 프로퍼티 추가, 삭제, 변경 금지 설정.
