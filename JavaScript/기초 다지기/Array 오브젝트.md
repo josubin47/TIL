@@ -88,3 +88,109 @@ log(val.sort()); //[7, 26, 101, 1234]
 ### reverse()
 
 배열의 엘리먼트 위치를 역순으로 바꾼다. 값이 아닌 인덱스 기준이다. 원본도 바꾼다.
+
+## ES6 기준
+
+### reduce()
+
+forEach()처럼 시맨틱 접근.
+
+1. 콜백 함수만 작성한 경우 = 파라미터를 하나만 작성
+
+```jsx
+let value = [1, 3, 5, 7];
+let fn = function(prev, curr, index, all) {
+	log(prev + "," + curr);
+	return prev + curr;
+};
+
+let result = value.reduce(fn);
+log(result);
+
+//1,3
+//prev 1 curr 3 index 1
+//처음 콜백 함수를 호출할 때
+//인덱스 [0]의 값을 직전 값에 설정하고
+//[1]의 값을 현재 값에 설정한다
+//인덱스에 1을 설정
+//4를 리턴
+
+//4,5
+//prev 4 curr 5 index 2
+//두 번째로 콜백 함수를 호출할 때
+//콜백 함수에서 반환된 값을 직전값에 설정
+//인덱스 [2]의 값을 현재 값에 설정
+
+//9,7
+//prev 9 curr 7 index 3
+//종료 (4번이 아니라 3번 반복한 것은 처음 시작할 때 인덱스가 1이기 때문)
+
+//16
+//9+7
+```
+
+> reduce()는 이와 같이 4개의 파라미터를 가지며 첫 번째 파라미터만 작성하면 두 개의 엘리먼트가 한 번에 설정된다. 따라서 length가 4이지만 3번만 반복하게 된다.
+> 
+
+1. 두 번째 파라미터를 작성한 경우
+
+```jsx
+let value = [1, 3, 5];
+let fn = function(prev, curr, index, all) {
+	log(prev + "," + curr);
+	return prev + curr;
+};
+
+let result = value.reduce(fn, 7); //
+log(result);
+
+//7,1
+//prev 7 curr 1 index 0
+//처음 콜백 함수를 호출할 때
+//두 번째 파라미터 값을 직전 값에 설정
+//인덱스 [0]의 값을 현재 값에 설정
+//인덱스에 0을 설정
+//8을 리턴
+
+//8,3
+//prev 8 curr 3 index 1
+//두 번째로 콜백 함수를 호출할 때
+//콜백 함수에서 반환된 값을 직전값에 설정
+//인덱스 [1]의 값을 현재 값에 설정
+
+//11,5
+//prev 11 curr 5 index 2
+
+//16
+//11+5
+```
+
+> 두 번째 파라미터 = 초기값으로 사용한다.
+> 
+
+### reduceRight()
+
+reduce()와 처리 방법이 같음. 배열 끝에서 앞으로 하나씩 읽어가면서 처리.
+
+```jsx
+let value = [1, 3, 5, 7];
+let fn = function(prev, curr, index, all) {
+	log(prev + "," + curr);
+	return prev + curr;
+};
+
+let result = value.reduce(fn);
+log(result);
+
+//7,5
+//prev 7 curr 5 index 1
+
+//12,3
+//prev 12 curr 3 index 2
+
+//15,1
+//prev 15 curr 1 index 3
+
+//16
+//15+1 
+```
