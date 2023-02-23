@@ -48,7 +48,84 @@ history.go(2);  // Logs "location: <http://example.com/example.html?page=3>, sta
 
 ```
 
-참고
 
-[](https://developer.mozilla.org/en-US/docs/Web/API/History_API)[https://developer.mozilla.org/en-US/docs/Web/API/History_API](https://developer.mozilla.org/en-US/docs/Web/API/History_API)
-[](https://developer.mozilla.org/en-US/docs/Web/API/Window/popstate_event)[https://developer.mozilla.org/en-US/docs/Web/API/Window/popstate_event](https://developer.mozilla.org/en-US/docs/Web/API/Window/popstate_event)
+# 구현하기
+
+## Router.js
+
+### 1. url 정보를 담고 있는 routes 배열 생성
+
+routes 배열을 생성하여 필요할 때마다 url을 하나씩 추가할 수 있게 하였다.
+
+path에는 url을 정규표현식으로 작성하였고 view에는 이동할 페이지를 넣어주었다.
+
+```jsx
+const routes = [
+    { path: /^\/$/, view: Home },
+    { path: /\/test1/, view: Test1 },
+    { path: /\/test2/, view: Test2 },
+    { path: /^\/test\/(\d+)$/, view: TestA },
+];
+```
+
+### 2. 현재 url과 일치하는 route 정보를 찾는 함수 작성
+
+routes 배열에서 location.pathname과 일치하는 route 정보를 찾아 반환한다.
+
+```jsx
+const findMatchRoute = () => {
+    return routes.find((route) => route.path.test(location.pathname));
+};
+```
+
+### 3. render 함수 작성
+
+뷰 인스턴스를 생성하고 뷰.js의 render 함수를 호출해 뷰를 렌더링하는 로직을 담고 있다. 각 뷰마다 공통적으로 render 함수를 가지도록 설계하였다.
+
+매개변수는 필요시 로직을 추가 구현하여 사용한다.
+
+```jsx
+this.render = ($data) => {
+    const $view = findMatchRoute().view;
+    const app = new $view();
+    document.querySelector("#app").innerHTML = app.render();
+};
+```
+
+### 4. navigate 함수 작성
+
+history.pushState()를 이용해 url 정보를 바꿔주는 함수이다. url 정보를 바꾸면서 3번에 작성한 render 함수를 호출하여 뷰를 렌더링한다.
+
+```jsx
+this.navigate = (url) => {
+    history.pushState({ url: url }, "", url);
+    this.render();
+};
+```
+
+### 5. 라우터 초기화 함수 작성
+
+app.js 초기화 시에 호출할 라우터 초기화 함수이다.
+
+뒤로가기를 눌렀을 때 onpopstate를 통해 url과 맞는 뷰가 렌더링되도록 처리해준다.
+
+```jsx
+this.currentPage = "/";
+
+this.init = () => {
+    this.navigate(this.currentPage);
+
+    window.onpopstate = (e) => {
+      this.navigate(location.href);
+    };
+};
+```
+
+### [작성 중인 코드 ✏️✏️](https://github.com/josubin47/VanillaJS-study)
+
+
+### 참고
+
+- [History API](https://developer.mozilla.org/en-US/docs/Web/API/History_API)
+
+- [popstat event](https://developer.mozilla.org/en-US/docs/Web/API/Window/popstate_event)
